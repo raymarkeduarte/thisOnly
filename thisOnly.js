@@ -3,7 +3,7 @@
  * @author RED
  */
 $(document).ready(function(){
-    $('[numOnly]').each(function(){
+    $('[numonly]').each(function(){
         $(this).on('keypress', function(e){
             // get value
             let val = $(this).attr('numOnly');
@@ -25,7 +25,7 @@ $(document).ready(function(){
             if( notNum || escHasNum ) e.preventDefault();
         });
     });
-    $('[letOnly]').each(function(){
+    $('[letonly]').each(function(){
         $(this).on('keypress', function(e){
             // get value
             let val = $(this).attr('letOnly');
@@ -38,7 +38,7 @@ $(document).ready(function(){
             const key = e.which || e.keyCode;
             let code = String.fromCharCode(key);
             code = (isSensitive) ? code : code.toLowerCase();
-            const notLet = (code > 31 && ( (key < 65 || key > 90) && (key < 97 || key > 122) ) );
+            const notLet = (key > 31 && ( (key < 65 || key > 90) && (key < 97 || key > 122) ) );
             const escHasLet = (esc.includes(code) && !notLet)
             // allow non-latin alphabet and custom keys defined
             if( notLet && esc.includes(code) ) return;
@@ -47,7 +47,7 @@ $(document).ready(function(){
             if( notLet || escHasLet ) e.preventDefault();
         });
     });
-    $('[thisOnly]').each(function(){
+    $('[thisonly]').each(function(){
         $(this).on('keypress', function(e){
             // get value
             let val = $(this).attr('thisOnly');
@@ -62,6 +62,12 @@ $(document).ready(function(){
             code = (isSensitive) ? code : code.toLowerCase();
             // only allow characters defined
             if( !esc.includes(code) ) e.preventDefault();
+        });
+    });
+    $('[maxlen]').each(function(){
+        $(this).on('keypress', function(e){
+            const length = $(this).attr('maxLen');
+            if( this.value.length >= length ) e.preventDefault();
         });
     });
 });
